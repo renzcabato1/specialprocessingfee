@@ -120,6 +120,7 @@
                         <a href="#"><i class="fa fa-wrench"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                           <li  @if($subheader == 'Users') class='active' @endif> <a href="{{ url('/users') }}" class='active' onclick='show()' ><i class="fa fa-user"></i> <span class="nav-label">Users</span> </a></li>
+                          <li  @if($subheader == 'Companies') class='active' @endif> <a href="{{ url('/companies') }}" class='active' onclick='show()' ><i class="fa fa-gears"></i> <span class="nav-label">Companies</span> </a></li>
                         </ul>
                     </li>
                 </ul>
@@ -176,6 +177,7 @@
                     event.preventDefault();
                     document.getElementById('logout-form').submit();
                 }
+              
             </script>
            
             <script src="{{ asset('bootstrap/js/jquery-3.1.1.min.js') }}"></script>
@@ -251,8 +253,11 @@
                             
                         });
             });
+
+            
         
         </script>      
+        
     </body>
 </html>
             

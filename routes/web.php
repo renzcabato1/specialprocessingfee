@@ -47,6 +47,17 @@ Route::post('new-request','RequestController@new_request');
 
 
 //for-review
-Route::get('for-review','RequestController@requests');
+Route::get('for-review','RequestController@for_review');
+Route::post('approved-request/{id}','RequestController@approved_request');
+Route::post('declined-request/{id}','RequestController@declined_request');
+
+
+//for-verification
+Route::get('for-verification','RequestController@for_verification');
+
+
+//Companies
+Route::get('companies','CompanyController@companies');
+Route::post('edit-company/{id}','CompanyController@editCompany');
 
 });

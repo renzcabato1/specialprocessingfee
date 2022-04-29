@@ -8,24 +8,11 @@
         <div class="col-lg-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <span class="label label-success pull-right">as of Today</span>
-                    <h5>Total Requests</h5>
-                </div>
-                <div class="ibox-content">
-                    <h1 class="no-margins" >{{count($form_requests)}}</h1>
-                    {{-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> --}}
-                    <small>&nbsp;</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
                     <span class="label label-warning pull-right">as of Today</span>
-                    <h5> Pending Requests</h5>
+                    <h5> Pending For Review</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins" id='pending_request'>{{count($form_requests_pending)}}</h1>
+                    <h1 class="no-margins" id='pending_request'>0</h1>
                     {{-- <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div> --}}
                     <small>&nbsp;</small>
                 </div>
@@ -35,7 +22,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <span class="label label-primary pull-right">as of Today</span>
-                    <h5>Approved Requests</h5>
+                    <h5>Approved Request</h5>
                 </div>
                 <div class="ibox-content">
                     <h1 class="no-margins" >0</h1>
@@ -48,7 +35,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <span class="label label-danger pull-right">as of Today</span>
-                    <h5>Declined/Cancelled Requests</h5>
+                    <h5>Declined Requests</h5>
                 </div>
                 <div class="ibox-content">
                     <h1 class="no-margins" id='declined_request'>0</h1>
@@ -74,9 +61,7 @@
                     </h5>
                     <div ibox-tools></div>
                 </div> --}}
-                <h5>
-                    <button class="btn btn-primary" data-target="#new_request" data-toggle="modal" type="button"><i class="fa fa-plus-circle"></i>&nbsp;</button>
-                </h5>
+              
                 <div class="ibox-content">
                     <table datatable="" dt-options="dtOptions" class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
@@ -108,10 +93,6 @@
                                         
                                     <td>{!! nl2br(e($form->purpose)) !!}</td>
                                     <td><small>
-                                        @if($form->status == "Pending")
-                                        Name : {{$form->name_of_payee}}
-                                        <br>
-                                        @endif
                                         Code : PAYEE-{{str_pad($form->payee_code, 6, '0', STR_PAD_LEFT)}}
                                         <br>
                                         Bank : {{$form->bank_info->bank_name}}
@@ -132,11 +113,11 @@
                                         @endif
                                     </td>
                                     <td>{{$form->status}}</td>
-                                    <td data-id='{{$form->id}}' id='actionRow{{$form->id}}'>
-                                        @if($form->status == "Pending")
-                                            <button class="btn btn-sm btn-info"  title='Edit' data-target="#edit_request{{$form->id}}" data-toggle="modal"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-sm btn-danger remove-request" title='Cancel' ><i class="fa fa-trash"></i></button>
-                                        @endif
+                                    <td data-id='{{$form->id}}'>
+                                        <button class="btn btn-sm btn-info "  title='Approve Request'  data-target="#approveRequest{{$form->id}}" data-toggle="modal" ><i class="fa fa-check-square-o"></i></button>
+                                        <button class="btn btn-sm btn-danger declined-request" title='Decline Request'  data-target="#declinedRequest{{$form->id}}" data-toggle="modal" ><i class="fa fa-window-close-o"></i></button>
+                                        @include('approved_request')
+                                        @include('decline_request')
                                     </td>
                                 </tr>   
                             @endforeach
@@ -147,5 +128,4 @@
         </div>
     </div>
 </div>
-@include('new_request')
 @endsection
