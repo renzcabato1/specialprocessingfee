@@ -82,7 +82,13 @@
                         <tbody>
                             @foreach($form_requests as $form)
                                 <tr>
-                                    <td>SPF-{{$form->project->company->company_code}}-{{str_pad($form->id, 6, '0', STR_PAD_LEFT)}}</td>
+                                    <td>
+                                        @if($form->project  != null)
+                                        SPF-{{$form->project->company->company_code}}-{{str_pad($form->id, 6, '0', STR_PAD_LEFT)}}
+                                        @else
+                                        SPF-{{$form->user->company->company_code}}-{{str_pad($form->id, 6, '0', STR_PAD_LEFT)}}
+                                        @endif
+                                    </td>
                                     <td>{{$form->user->name}}</td>
                                     <td>{{date('F d, Y',strtotime($form->created_at))}}</td>
                                     <td> @if($form->project != null)
@@ -91,8 +97,9 @@
                                         <br>
                                         Remaining Budget : {{number_format($form->project->spf_budget,2)}}
                                         <br>
+                                        </small>
                                         @endif
-                                        
+                                    </td>
                                     <td>{!! nl2br(e($form->purpose)) !!}</td>
                                     <td><small>
                                         Code : PAYEE-{{str_pad($form->payee_code, 6, '0', STR_PAD_LEFT)}}
