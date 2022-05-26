@@ -86,7 +86,7 @@
                                     <td>{{$form->user->name}}</td>
                                     <td>{{date('F d, Y',strtotime($form->created_at))}}</td>
                                     <td> 
-                                        @if($form->project)<small>
+                                        @if($form->project != null)<small>
                                             Project ID : {{$form->project->project_id}}
                                             <br>
                                             Remaining Budget : {{number_format($form->project->spf_budget,2)}}

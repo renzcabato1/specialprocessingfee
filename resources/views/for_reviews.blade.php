@@ -85,7 +85,7 @@
                                     <td>SPF-{{$form->project->company->company_code}}-{{str_pad($form->id, 6, '0', STR_PAD_LEFT)}}</td>
                                     <td>{{$form->user->name}}</td>
                                     <td>{{date('F d, Y',strtotime($form->created_at))}}</td>
-                                    <td> @if($form->project)
+                                    <td> @if($form->project != null)
                                         <small>
                                         Project ID : {{$form->project->project_id}}
                                         <br>
