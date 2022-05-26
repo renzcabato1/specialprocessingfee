@@ -85,12 +85,13 @@
                                     <td>SPF-{{$form->project->company->company_code}}-{{str_pad($form->id, 6, '0', STR_PAD_LEFT)}}</td>
                                     <td>{{$form->user->name}}</td>
                                     <td>{{date('F d, Y',strtotime($form->created_at))}}</td>
-                                    <td> <small>
-                                        Project ID : {{$form->project->project_id}}
-                                        <br>
-                                        Remaining Budget : {{number_format($form->project->spf_budget,2)}}
-                                        <br>
-                                        
+                                    <td> 
+                                        @if($form->project)<small>
+                                            Project ID : {{$form->project->project_id}}
+                                            <br>
+                                            Remaining Budget : {{number_format($form->project->spf_budget,2)}}
+                                            <br>
+                                        @endif
                                     <td>{!! nl2br(e($form->purpose)) !!}</td>
                                     <td><small>
                                         Code : PAYEE-{{str_pad($form->payee_code, 6, '0', STR_PAD_LEFT)}}
