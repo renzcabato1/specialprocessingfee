@@ -42,7 +42,6 @@ class UserController extends Controller
          $new_account->name = $request->name;
          $new_account->email = $request->email;
          $new_account->company_id = $request->company;
-         $new_account->approver_id = $request->approver;
          $new_account->department_id = $request->department;
          $new_account->role_id = $request->role;
          // $new_account->role = 1;
