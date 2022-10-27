@@ -272,7 +272,7 @@
 		<script src="{{ asset('bootstrap/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
 
 		<script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}" type="text/javascript"></script>
-
+		@include('sweetalert::alert')
 		<script>
 			$(document).ready(function() {
 
