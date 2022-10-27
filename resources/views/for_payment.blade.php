@@ -3,11 +3,11 @@
 @section('content')
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="col-sm-4">
-			<h2>For Verification List</h2>
+			<h2>For Payment List</h2>
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-					<li class="breadcrumb-item active font-weight-bold" aria-current="page">For Verification</li>
+					<li class="breadcrumb-item active font-weight-bold" aria-current="page">For Payment</li>
 				</ol>
 			</nav>
 		</div>
@@ -133,20 +133,19 @@
 											@endif
 										</td>
 										<td>
-											@if ($form->status == 'Reviewed')
-												<span id="status{{ $form->id }}" class="badge badge-info">
+											@if ($form->status == 'Approved')
+												<span id="status{{ $form->id }}" class="badge badge-primary">
 													{{ $form->status }}
 												</span>
 											@endif
-
 										</td>
 										<td data-id='{{ $form->id }}'>
-											<button class="btn btn-sm btn-info " title='Approve Request' data-target="#verifyRequest{{ $form->id }}"
+											<button class="btn btn-sm btn-info " title='Approve Request' data-target="#approveRequest{{ $form->id }}"
 												data-toggle="modal"><i class="fa fa-check-square-o"></i></button>
 											<button class="btn btn-sm btn-danger declined-request" title='Decline Request'
 												data-target="#declinedRequest{{ $form->id }}" data-toggle="modal"><i
 													class="fa fa-window-close-o"></i></button>
-											@include('verified_request')
+											@include('approved_request')
 											@include('decline_request')
 										</td>
 									</tr>

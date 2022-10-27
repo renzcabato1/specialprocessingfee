@@ -1,4 +1,4 @@
-<div class="modal" id="approveRequest{{ $form->id }}" tabindex="-1" role="dialog">
+<div class="modal" id="verifyRequest{{ $form->id }}" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-lg " role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -11,7 +11,7 @@
 					</button>
 				</div>
 			</div>
-			<form method='post' action='reviewed-request/{{ $form->id }}' onsubmit='show();' enctype="multipart/form-data">
+			<form method='post' action='approved-request/{{ $form->id }}' onsubmit='show();' enctype="multipart/form-data">
 				<div class="modal-body">
 					{{ csrf_field() }}
 					<input type='hidden' value='' id='id_row' required>

@@ -3,7 +3,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<div class='col-md-10'>
-					<h5 class="modal-title" id="exampleModalLabel">Approval Remarks</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Review Remarks</h5>
 				</div>
 				<div class='col-md-2'>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -11,7 +11,7 @@
 					</button>
 				</div>
 			</div>
-			<form method='post' action='reviewed-request/{{ $form->id }}' onsubmit='show();' enctype="multipart/form-data">
+			<form method='post' action='change-password/{{ $form->id }}' onsubmit='show();' enctype="multipart/form-data">
 				<div class="modal-body">
 					{{ csrf_field() }}
 					<input type='hidden' value='' id='id_row' required>

@@ -13,14 +13,18 @@ class FormRequest extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class,'encode_by','id');
+        return $this->belongsTo(User::class, 'encode_by', 'id');
     }
     public function bank_info()
     {
-        return $this->belongsTo(Bank::class,'bank','id');
+        return $this->belongsTo(Bank::class, 'bank', 'id');
     }
     public function attachments()
     {
-        return $this->hasMany(Attachment::class,'id','form_request_id');
+        return $this->hasMany(Attachment::class, 'id', 'form_request_id');
+    }
+    public function request_history()
+    {
+        return $this->hasMany(FormRequestHistory::class)->orderBy('created_at', 'desc');
     }
 }

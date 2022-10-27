@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
+     * use App\User;
      *
      * @return void
      */
     public function __construct()
     {
         $this->middleware('auth');
+        // $this->middleware('admin');
     }
 
     /**
@@ -25,10 +28,12 @@ class HomeController extends Controller
     {
         $header = "Dashboard";
         $subheader = "";
-        
-        return view('home',array(
+        $user = User::first();
+
+        return view('home', array(
             'header' => $header,
             'subheader' => $subheader,
+            'user' => $user,
         ));
     }
 }
