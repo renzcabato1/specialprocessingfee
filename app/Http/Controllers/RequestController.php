@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Bank;
+use App\User;
 use App\Project;
 use App\FormRequest;
 use App\FormRequestHistory;
 use Illuminate\Http\Request;
+use App\Notifications\ReviewNotif;
+use App\Notifications\ApprovalNotif;
 
 class RequestController extends Controller
 {
@@ -39,7 +42,7 @@ class RequestController extends Controller
     }
     public function new_request(Request $request)
     {
-        // dd($request->all());
+        $reqApprover = User::where('role_id', '4')->orderBy('id', 'desc')->first();
         $pay_code = FormRequest::orderBy('id', 'desc')->first();
         if ($pay_code == "") {
             $code = 1;
@@ -58,6 +61,7 @@ class RequestController extends Controller
         $form->payee_code = $code;
         $form->remarks = $request->remarks;
         $form->encode_by = auth()->user()->id;
+        $form->approval_id = $reqApprover->id;
         $form->status = "Pending";
         $form->save();
 
@@ -67,6 +71,11 @@ class RequestController extends Controller
         $history->remarks = $request->remarks;
         $history->action_by = auth()->user()->id;
         $history->save();
+
+
+        $userReviewer = User::where('id', $form->approval_id)->first();
+        $requestor = User::where('id', $form->encode_by)->first();
+        $userReviewer->notify(new ReviewNotif($form));
 
         $request->session()->flash('status', 'Successfully created');
         return back();
@@ -124,9 +133,12 @@ class RequestController extends Controller
     public function reviewed_request(Request $request, $id)
     {
         // dd($request);
+        $reqApprover = User::where('role_id', '5')->orderBy('id', 'desc')->first();
+        // dd($reqApprover);
         $form = FormRequest::where('id', $id)->first();
         $form->status = "Reviewed";
         $form->remarks = $request->remarks;
+        $form->approval_id = $reqApprover->id;
         $form->save();
 
         $history = new FormRequestHistory;
@@ -135,6 +147,11 @@ class RequestController extends Controller
         $history->remarks = $request->remarks;
         $history->action_by = auth()->user()->id;
         $history->save();
+
+        $userLvl2Approver = User::where('id', $form->approval_id)->first();
+        // dd($form);
+        $userLvl2Approver->notify(new ApprovalNotif($form));
+
         $request->session()->flash('status', 'Successfully Reviewed');
         return back();
     }

@@ -59,38 +59,39 @@
 						</select>
 					</div>
 					{{-- @if ($user->approver_id != '')
-                    <div class='col-md-12' id='edit_approver_id{{$user->id}}'>
-                        Approver :
-                        <select name='approver' id='approver{{$user->id}}' class='form-control-sm form-control category' >
-                            <option value=""></option>
-                            @foreach ($users as $us)
-                                @if ($us->status != 1)
-                                    @if ($us->id != Auth::user()->id)
-                                        @if ($us->role_id == 4 || $us->role_id == 5)
-                                            <option value='{{$us->id}}' @if ($us->id == $user->approver_id) selected @endif>{{$us->name}}</option>
-                                        @endif
-                                    @endif                                            
-                                @endif
-                            @endforeach
-                        </select>
-                     </div>
-                     @else
-                     <div class='col-md-12' id='edit_approver_id{{$user->id}}' style='display:none'>
-                        Approver :
-                        <select name='approver' id='approver{{$user->id}}' class='form-control-sm form-control category' >
-                            <option value=""></option>
-                            @foreach ($users as $user)
-                                @if ($user->status != 1)
-                                    @if ($user->id != Auth::user()->id)
-                                        @if ($user->role_id == 5 || $user->role_id == 4)
-                                            <option value='{{$user->id}}'>{{$user->name}}</option>
-                                        @endif
-                                    @endif                                            
-                                @endif
-                            @endforeach
-                        </select>
-                     </div>
-                     @endif --}}
+						<div class='col-md-12' id='edit_approver_id{{ $user->id }}'>
+							Approver :
+							<select name='approver' id='approver{{ $user->id }}' class='form-control-sm form-control category'>
+								<option value=""></option>
+								@foreach ($users as $us)
+									@if ($us->status != 1)
+										@if ($us->id != Auth::user()->id)
+											@if ($us->role_id == 4 || $us->role_id == 5)
+												<option value='{{ $us->id }}' @if ($us->id == $user->approver_id) selected @endif>{{ $us->name }}
+												</option>
+											@endif
+										@endif
+									@endif
+								@endforeach
+							</select>
+						</div>
+					@else
+						<div class='col-md-12' id='edit_approver_id{{ $user->id }}' style='display:none'>
+							Approver :
+							<select name='approver' id='approver{{ $user->id }}' class='form-control-sm form-control category'>
+								<option value=""></option>
+								@foreach ($users as $user)
+									@if ($user->status != 1)
+										@if ($user->id != Auth::user()->id)
+											@if ($user->role_id == 5 || $user->role_id == 4)
+												<option value='{{ $user->id }}'>{{ $user->name }}</option>
+											@endif
+										@endif
+									@endif
+								@endforeach
+							</select>
+						</div>
+					@endif --}}
 
 				</div>
 				<div class="modal-footer">
