@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
+use App\Project;
+use App\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {
@@ -30,10 +33,23 @@ class HomeController extends Controller
         $subheader = "";
         $user = User::first();
 
+        $projects = Project::get();
+
+        $allRequests = FormRequest::with('project')->orderBy('created_at', 'DESC')->get();
+        $requestsPerYear = FormRequest::whereYear('created_at', date('Y'))->get();
+        $requestsLastMonth = FormRequest::whereMonth('created_at', Carbon::now()->subMonth()->month)->get();
+
+        // $x = $requests->;
+        // dd($requestsLastMonth);
+
         return view('home', array(
             'header' => $header,
             'subheader' => $subheader,
             'user' => $user,
+            'projects' => $projects,
+            'allRequests' => $allRequests,
+            'requestsPerYear' => $requestsPerYear,
+            'requestsLastMonth' => $requestsLastMonth,
         ));
     }
 }

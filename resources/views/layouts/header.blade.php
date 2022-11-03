@@ -271,8 +271,18 @@
 		<!-- Data picker -->
 		<script src="{{ asset('bootstrap/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
 
+		<!-- EayPIE -->
+		<script src="{{ asset('bootstrap/js/plugins/easypiechart/jquery.easypiechart.js') }}"></script>
+
+		<script src="{{ asset('bootstrap/js/plugins/easypiechart/jquery.easypiechart.js') }}"></script>
+		<script src="{{ asset('bootstrap/js/plugins/chartJs/Chart.min.js') }}"></script>
+
+		<!-- Sparkline -->
+		{{-- <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script> --}}
+
 		<script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}" type="text/javascript"></script>
 		@include('sweetalert::alert')
+		@yield('dashboard_script')
 		<script>
 			$(document).ready(function() {
 
@@ -297,9 +307,40 @@
 
 
 				});
+				$('#pendingReqTbl').DataTable({
+					pageLength: 10,
+					"displayLength": 10,
+					lengthMenu: [
+						[10, 25, 50, -1],
+						[10, 25, 50, "All"],
+					],
+					pagging: true,
+					scrollY: true,
+					responsive: true,
+					searching: true,
+					ordering: true,
+
+				});
+				$('#approvedReqTbl').DataTable({
+					pageLength: 10,
+					"displayLength": 10,
+					lengthMenu: [
+						[10, 25, 50, -1],
+						[10, 25, 50, "All"],
+					],
+					pagging: true,
+					scrollY: true,
+					responsive: true,
+					searching: true,
+					ordering: true,
+
+				});
+
 			});
 		</script>
+
 		@include('sweetalert::alert')
+
 </body>
 
 </html>
