@@ -144,10 +144,12 @@
 							<tbody>
 								@foreach ($allRequests->where('status', 'Pending') as $pendingReq)
 									<tr>
+
 										<td><span class="label label-warning">{{ $pendingReq->status }}</span></td>
 										<td>{{ $pendingReq->spf_type }}</td>
 										<td>{{ date('F d, Y', strtotime($pendingReq->created_at)) }}</td>
-										<td>{{ $pendingReq->project->project_description }}</td>
+										<td>{{ $pendingReq->project != null ? $pendingReq->project->project_description : 'No Project Connected' }}
+										</td>
 									</tr>
 								@endforeach
 							</tbody>
