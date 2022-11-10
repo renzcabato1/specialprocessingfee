@@ -115,7 +115,11 @@
 										<td><small>
 												Code : PAYEE-{{ str_pad($form->payee_code, 6, '0', STR_PAD_LEFT) }}
 												<br>
-												Bank : {{ $form->bank_info->bank_name }}
+												Bank :
+												@if ($form->bank_info)
+													{{ $form->bank_info->bank_name }}
+												@endif
+
 												<br>
 												Account Number : {{ $form->account_number }}
 												<br>
