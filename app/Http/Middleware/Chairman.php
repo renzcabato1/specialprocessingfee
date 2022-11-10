@@ -21,7 +21,7 @@ class Chairman
         } elseif (Auth::user()->role_id == 3) {
             return redirect('requests');
         } elseif (Auth::user()->role_id == 4) {
-            return redirect('/for-review');
+            return redirect('for-review');
         }
     }
 }

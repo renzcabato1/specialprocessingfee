@@ -33,7 +33,11 @@
 	<link href="{{ asset('bootstrap/css/plugins/datapicker/datepicker3.css') }}" rel="stylesheet">
 
 	<link href="{{ asset('bootstrap/css/plugins/jasny/jasny-bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('bootstrap/css/plugins/dropzone/basic.css') }}" rel="stylesheet">
+	<link href="{{ asset('bootstrap/css/plugins/dropzone/dropzone.css') }}" rel="stylesheet">
+
 	<link href="{{ asset('bootstrap/css/plugins/daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('bootstrap/css/plugins/dataTables/datatables.min.css') }}">
 	<link href="{{ asset('bootstrap/css/animate.css') }}" rel="stylesheet">
 	<link href="{{ asset('bootstrap/css/style.css') }}" rel="stylesheet">
 	<link href="{{ asset('bootstrap/css/plugins/select2/select2.min.css') }}" rel="stylesheet">
@@ -137,11 +141,11 @@
 									class="nav-label">For Verification</span> </a>
 						</li>
 					@endif
-					@if (auth()->user()->role_id == 3 || auth()->user()->role_id == 1)
-						{{-- <li @if ($header == 'For Payment') class='active' @endif>
+					@if (auth()->user()->role_id == 3)
+						<li @if ($header == 'For Payment') class='active' @endif>
 							<a href="{{ url('/for-payment') }}" class='active' onclick='show()'><i class="fa fa-money"></i> <span
 									class="nav-label">For Payment</span> </a>
-						</li> --}}
+						</li>
 					@endif
 					@if (auth()->user()->role_id == 1)
 						<li @if ($header == 'Projects') class='active' @endif>
@@ -276,6 +280,10 @@
 
 		<script src="{{ asset('bootstrap/js/plugins/easypiechart/jquery.easypiechart.js') }}"></script>
 		<script src="{{ asset('bootstrap/js/plugins/chartJs/Chart.min.js') }}"></script>
+		<!-- Jasny -->
+		<script src="{{ asset('bootstrap/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
+		<!-- DROPZONE -->
+		<script src="{{ asset('bootstrap/js/plugins/dropzone/dropzone.js') }}"></script>
 
 		<!-- Sparkline -->
 		{{-- <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script> --}}
@@ -283,6 +291,8 @@
 		<script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}" type="text/javascript"></script>
 		@include('sweetalert::alert')
 		@yield('dashboard_script')
+		@yield('payment_script')
+
 		<script>
 			$(document).ready(function() {
 

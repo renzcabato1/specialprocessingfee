@@ -10,6 +10,7 @@ use App\FormRequestHistory;
 use Illuminate\Http\Request;
 use App\Notifications\ReviewNotif;
 use App\Notifications\ApprovalNotif;
+use App\Payment;
 
 class RequestController extends Controller
 {
@@ -161,6 +162,7 @@ class RequestController extends Controller
         $form_requests = FormRequest::with('project.company', 'user', 'bank_info', 'attachments')->where('status', 'Approved')->get();
         $header = "For Payment";
         $subheader = "";
+        $payments = Payment::all();
 
         return view(
             'for_payment',
@@ -169,8 +171,33 @@ class RequestController extends Controller
                 'subheader' => $subheader,
                 'projects' => $projects,
                 'form_requests' => $form_requests,
+                'payments' =>  $payments,
             )
         );
+    }
+    public function save_payment(Request $request, $id)
+    {
+        // dd($id);
+        $this->validate($request, [
+            'voucher_number' => 'required',
+            'voucher_amount' => 'required',
+            'attachment' => 'required|file|image|mimes:jpeg,png,gif,webp|max:2048'
+        ]);
+        $file      = $request['attachment']; // get the validated file
+        $extension = $file->getClientOriginalExtension();
+        $filename  = 'payment-' . time() . '.' . $extension;
+        $path      = $file->storeAs('payments_attachment', $filename);
+
+        $payment = new Payment;
+        $payment->voucher_number = $request->voucher_number;
+        $payment->voucher_amount = $request->voucher_amount;
+        $payment->request_id = $id;
+        $payment->attachment = $path;
+        $payment->encoded_by = auth()->user()->id;
+        $payment->save();
+
+        $request->session()->flash('status', 'Successfully Store');
+        return back();
     }
     public function approved_request(Request $request, $id)
     {

@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('requests', 'RequestController@requests');
                 Route::post('new-request', 'RequestController@new_request');
                 Route::post('cancel-request/{id}', 'RequestController@cancel_request');
+                Route::get('for-payment', 'RequestController@for_payment');
+                Route::post('save-payment/{id}', 'RequestController@save_payment');
         });
         Route::group(['middleware' => ['corpSec']], function () {
                 //for-review
@@ -56,7 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::post('declined-request/{id}', 'RequestController@declined_request');
         });
 });
-       
+
 // Route::group(['middleware' => 'admin'], function () {
 // });
 // Route::group(['middleware' => 'financeManager'], function () {
@@ -66,4 +68,3 @@ Route::group(['middleware' => ['auth']], function () {
 // });
 // Route::group(['middleware' => 'chairman'], function () {
 //for-payment
-//Route::get('for-payment', 'RequestController@for_payment');
