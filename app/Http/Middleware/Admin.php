@@ -22,7 +22,7 @@ class Admin
             return redirect('requests');
         } elseif (Auth::user()->role_id == 4) {
             return redirect('for-review');
-        } else {
+        } elseif(Auth::user()->role_id == 5) {
             return redirect('for-verification');
         }
     }

@@ -22,6 +22,8 @@ class CorpSec
             return redirect('requests');
         } elseif (Auth::user()->role_id == 5) {
             return redirect('for-verification');
+        } elseif (Auth::user()->role_id == 1) {
+            return redirect('/');
         }
     }
 }
