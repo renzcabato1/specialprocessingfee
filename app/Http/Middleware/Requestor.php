@@ -16,14 +16,12 @@ class Requestor
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role == 3) {
+        if (Auth::check() && Auth::user()->role == 3 || Auth::check() && Auth::user()->role == 2) {
             return redirect('requests');
         } elseif (Auth::check() && Auth::user()->role == 4) {
             return redirect('for-review');
         } elseif (Auth::check() && Auth::user()->role == 5) {
             return redirect('for-verification');
-        } else {
-            return $next($request);
         }
     }
 }
