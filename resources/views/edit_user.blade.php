@@ -40,8 +40,7 @@
 						<select name='department' class='form-control-sm form-control category' required>
 							<option value=""></option>
 							@foreach ($departments as $dep)
-								@if ($dep->status)
-								@else
+								@if ($dep->status == 'Active')
 									<option value='{{ $dep->id }}' @if ($user->department_id == $dep->id) selected @endif>
 										{{ $dep->department_code }} - {{ $dep->department_name }}</option>
 								@endif

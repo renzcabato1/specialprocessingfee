@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/', 'HomeController@index');
                 Route::get('/home', 'HomeController@index')->name('home');
         });
-        Route::group(['middleware' => ['financeManager']], function () {
+        Route::group(['middleware' => ['financeManager' || 'requestor']], function () {
                 Route::get('requests', 'RequestController@requests');
                 Route::post('new-request', 'RequestController@new_request');
                 Route::post('cancel-request/{id}', 'RequestController@cancel_request');

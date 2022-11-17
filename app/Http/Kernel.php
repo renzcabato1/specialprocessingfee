@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'corpSec' => \App\Http\Middleware\CorpSec::class,
         'financeManager' => \App\Http\Middleware\FinanceManager::class,
         'chairman' => \App\Http\Middleware\Chairman::class,
+        'requestor' => \App\Http\Middleware\Requestor::class,
 
     ];
 

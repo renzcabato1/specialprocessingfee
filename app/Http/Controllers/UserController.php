@@ -96,7 +96,6 @@ class UserController extends Controller
     }
     public function edit_user(Request $request, $id)
     {
-        dd($request);
 
         $this->validate($request, [
             'email' => 'unique:users,email,' . $id,
