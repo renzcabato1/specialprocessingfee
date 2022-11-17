@@ -16,7 +16,7 @@ class Requestor
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->role_id == 2) {
+        if (Auth::user()->role_id == 2 || Auth::user()->role_id == 3) {
             return $next($request);
         } elseif (Auth::user()->role_id == 4) {
             return redirect('for-review');

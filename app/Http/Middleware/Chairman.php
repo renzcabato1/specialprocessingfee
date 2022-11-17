@@ -18,7 +18,7 @@ class Chairman
     {
         if (Auth::user()->role_id == 5) {
             return $next($request);
-        } elseif (Auth::user()->role_id == 3) {
+        } elseif (Auth::user()->role_id == 3 || Auth::user()->role_id == 2) {
             return redirect('requests');
         } elseif (Auth::user()->role_id == 4) {
             return redirect('for-review');

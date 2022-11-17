@@ -16,7 +16,7 @@ class FinanceManager
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->role_id == 3) {
+        if (Auth::user()->role_id == 3 || Auth::user()->role_id == 2) {
             return $next($request);
         } elseif (Auth::user()->role_id == 4) {
             return redirect('for-review');

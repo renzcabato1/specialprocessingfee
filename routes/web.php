@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,7 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/', 'HomeController@index');
                 Route::get('/home', 'HomeController@index')->name('home');
         });
-        Route::group(['middleware' => ['financeManager' || 'requestor']], function () {
+        Route::group(['middleware' => ['requestor' || 'financeManager']], function () {
                 Route::get('requests', 'RequestController@requests');
                 Route::post('new-request', 'RequestController@new_request');
                 Route::post('cancel-request/{id}', 'RequestController@cancel_request');
