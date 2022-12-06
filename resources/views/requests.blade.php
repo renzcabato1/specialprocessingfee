@@ -150,11 +150,12 @@
 										<td>{{ number_format($form->amount, 2) }}
 										</td>
 										<td>
-
 											@if (count($form->attachments) == 0)
 												No Data Found
 											@else
+
 												@foreach ($form->attachments as $attachment)
+												<a href="{{ url($attachment->attachment_url) }}"style="text-decoration:none;" target="_blank" title="Open File" ><span class="fa fa-file"></span></a>
 												@endforeach
 											@endif
 										</td>

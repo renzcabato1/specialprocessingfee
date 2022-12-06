@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Notifications\ReviewNotif;
 use App\Notifications\ApprovalNotif;
 use App\Payment;
+use App\RequestAttachment;
 
 class RequestController extends Controller
 {
@@ -20,13 +21,13 @@ class RequestController extends Controller
     {
         $banks = Bank::get();
         $projects = Project::get();
-        $form_requests = FormRequest::with('project.company', 'user', 'bank_info', 'attachments')->where('encode_by', auth()->user()->id)->get();
+        $form_requests = FormRequest::with('project.company', 'user', 'bank_info', 'attachments')->where('encode_by', auth()->user()->id)->get()->orderBy('created_at', 'desc');
         $form_requests_pending = FormRequest::with('project.company', 'user', 'bank_info', 'attachments')->where('encode_by', auth()->user()->id)->where('status', 'Pending')->get();
         $form_requests_cancelled = FormRequest::with('project.company', 'user', 'bank_info', 'attachments', 'request_history')->where('encode_by', auth()->user()->id)->where('status', 'Cancelled')->get();
         $header = "Requests";
         $subheader = "";
 
-        // dd($form_requests);
+        // dd($form_requests->all());
 
         return view(
             'requests',
@@ -66,6 +67,19 @@ class RequestController extends Controller
         $form->status = "Pending";
         $form->save();
 
+        if ($request->hasFile('attachment')) {
+            foreach ($request->file('attachment') as $file) {
+                $path = $file->getClientOriginalName();
+                $name = time() . '-' . $path;
+                $attachment = new RequestAttachment();
+                $file->move(public_path() . '/request-files/', $name);
+                $file_name = '/request-files/' . $name;
+                $attachment->attachment_url = $file_name;
+                $attachment->form_request_id = $form->id;
+                $attachment->save();
+            }
+        }
+
         $history = new FormRequestHistory;
         $history->form_request_id = $form->id;
         $history->action = "Create Request";
@@ -99,7 +113,8 @@ class RequestController extends Controller
     {
         $banks = Bank::get();
         $projects = Project::get();
-        $form_requests = FormRequest::with('project.company', 'user', 'bank_info', 'attachments')->where('status', 'Pending')->get();
+        $form_requests = FormRequest::with('project.company', 'user', 'bank_info', 'attachments')->where('status', 'Pending')->orderBy('created_at', 'DESC')->get();
+        // dd($form_requests->all());
         $header = "For Review";
         $subheader = "";
 

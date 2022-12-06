@@ -300,7 +300,7 @@
 					width: "100%"
 				});
 
-				$('.dataTables-example').DataTable({
+				$('.for-review-tbl').DataTable({
 					lengthMenu: [
 						[10, 25, 50, -1],
 						[10, 25, 50, "All"]
@@ -310,7 +310,8 @@
 					scrollY: true,
 					responsive: true,
 					searching: true,
-					ordering: true,
+					sorting:false,
+					// ordering: true,
 					// lengthChange: true,
 					// info: false,
 					// dom: "lfrti"
@@ -329,6 +330,7 @@
 					responsive: true,
 					searching: true,
 					ordering: true,
+					sorting:false,
 
 				});
 				$('#approvedReqTbl').DataTable({
@@ -343,6 +345,7 @@
 					responsive: true,
 					searching: true,
 					ordering: true,
+					sorting:false,
 
 				});
 

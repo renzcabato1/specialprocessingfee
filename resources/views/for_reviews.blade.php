@@ -73,7 +73,7 @@
 
 					<div class="ibox-content">
 						<table datatable="" dt-options="dtOptions"
-							class="table table-striped table-bordered table-hover dataTables-example">
+							class="table table-striped table-bordered table-hover for-review-tbl">
 							<thead>
 								<tr>
 									{{-- <th>Logo</th> --}}
@@ -132,6 +132,7 @@
 												No Data Found
 											@else
 												@foreach ($form->attachments as $attachment)
+												<a href="{{ url($attachment->attachment_url) }}"style="text-decoration:none;" target="_blank" title="Open File" ><span class="fa fa-file"></span></a>
 												@endforeach
 											@endif
 										</td>

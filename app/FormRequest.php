@@ -21,7 +21,7 @@ class FormRequest extends Model
     }
     public function attachments()
     {
-        return $this->hasMany(Attachment::class, 'id', 'form_request_id');
+        return $this->hasMany(RequestAttachment::class, 'form_request_id', 'id');
     }
     public function request_history()
     {
